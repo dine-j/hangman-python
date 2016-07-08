@@ -8,4 +8,4 @@ def pick_word():
     return data.words[random_index]
 
 def encode_word(word, letters):
-    return "".join(['_' for letter in word if letter not in letters])
+    return "".join([letter if letter in letters else '_' for letter in word])
