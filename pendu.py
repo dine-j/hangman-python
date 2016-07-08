@@ -1,9 +1,23 @@
 import sys
 import data
 import functions
+import pickle
 
 def main():
-    print("Welcome to the Hangman game!\n\nNote: You can quit anytime by entering \"exit\".\n\nThe computer chose a word for you, and the word is:")
+    print("Welcome to the Hangman game!\n\nNote: You can quit anytime by entering \"exit\".")
+    player_name = raw_input("What's your name?\n")
+    
+    try:
+        with open("scores", 'r') as scores_file:
+            scores = pickle.Unpickler(scores_file).load()
+            scores_file.close()
+    except IOError:
+        scores_file = open("scores", 'w')
+        scores = {}
+        pickle.Pickler(scores_file).dump(scores)
+        scores_files.close()
+
+    print("Well, %s, the computer chose a word for you, and the word is:\n" % player_name)
     word = functions.pick_word()
     guesses = []
     while data.nb_rounds > 0 and word != functions.encode_word(word, guesses): 
@@ -23,6 +37,11 @@ def main():
 
     if word == functions.encode_word(word, guesses):
         print("Congrats! You found: %s" % word)
+        scores[player_name] = data.nb_rounds
+        with open("scores", 'w') as scores_file:
+            pickle.Pickler(scores_file).dump(scores)
+            scores_file.close()
+        functions.print_best_scores(scores)
     elif data.nb_rounds == 0:
         print("You didn't find it in 8 rounds! The word was %s" % word)
     elif data.nb_rounds == -1:
