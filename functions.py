@@ -12,9 +12,14 @@ def encode_word(word, letters):
 
 def print_best_scores(scores):
     score_table = "BEST SCORES - TOP 3:\n"
+    if len(scores) < 3:
+        top = len(scores)
+    else:
+        top = 3
     sorted(scores.items(), key=lambda x:x[1])
     best_players = scores.keys()
     i = 0
-    while i < 3:
-        score_table += best_players[i] + " " + scores[best_players[i]]
+    while i < top:
+        score_table += best_players[i] + " " + str(scores[best_players[i]]) + "\n"
+        i += 1
     return score_table

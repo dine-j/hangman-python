@@ -5,7 +5,7 @@ Python exercise from OpenClassrooms.com
 ## Presentation
 
 Classic hangman game with words of length 8.
-The player has therefore 8 rounds to guess the correct word.
+The player has therefore 8 chances to guess the correct word.
 
 Scores are computed based on how much rounds are left if the player wins.
 
